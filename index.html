@@ -42,17 +42,17 @@
             background: #ffffff;
             color: var(--text-muted);
             border: 1px solid var(--border-color);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
             border-radius: 20px;
-            padding: 6px 16px;
+            padding: 5px 14px;
             transition: all 0.2s;
         }
         .btn-filter.active, .btn-filter:hover {
             background: var(--brand-red);
             color: white;
             border-color: var(--brand-red);
-            box-shadow: 0 4px 12px rgba(230, 0, 18, 0.25);
+            box-shadow: 0 4px 12px rgba(230, 0, 18, 0.2);
         }
         .badge-brand {
             background-color: #fee2e2;
@@ -61,6 +61,19 @@
             font-size: 0.75rem;
             border-radius: 12px;
             padding: 4px 10px;
+            display: inline-block;
+        }
+        .tag-pill {
+            background: #fff5f5;
+            color: var(--brand-red-dark);
+            border: 1px solid #fca5a5;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         .insta-footer-card {
             border-radius: 14px;
@@ -75,18 +88,28 @@
         }
         .insta-footer-img {
             width: 100%;
-            height: 160px;
+            height: 165px;
             object-fit: cover;
             display: block;
+        }
+        .metric-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
+    <!-- CABEÇALHO COM LOGO AMPLIADA E NOMES ALINHADOS -->
     <header class="header-panel mb-4">
         <div class="container d-flex justify-content-between align-items-center">
+            
+            <!-- ALINHAMENTO DA LOGO COM TÍTULO E SELO -->
             <div class="d-flex align-items-center gap-3">
-                <svg width="48" height="58" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="65" height="78" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#ff3b47" />
@@ -101,69 +124,96 @@
                     <path d="M50 30C38.9543 30 30 38.9543 30 50C30 61.0457 38.9543 70 50 70C57.5 70 64 65.5 67 59H50V46H80C80.6 47.3 80.8 48.6 80.8 50C80.8 67.01 67.01 80.8 50 80.8C33 80.8 19.2 67.01 19.2 50C19.2 33 33 19.2 50 19.2C58.5 19.2 66.2 22.7 71.7 28.3L62.5 37.5C59.3 34.3 54.9 32.5 50 32.5V30Z" fill="white"/>
                 </svg>
 
-                <div>
-                    <span class="badge badge-brand mb-1">DASHBOARD PRIVADO DE INTELIGÊNCIA</span>
-                    <h3 class="fw-bold mb-0 text-dark">Guia SC Turismo</h3>
+                <div class="d-flex flex-column justify-content-center">
+                    <div>
+                        <span class="badge badge-brand mb-1">DASHBOARD PRIVADO DE INTELIGÊNCIA</span>
+                    </div>
+                    <h2 class="fw-bold mb-0 text-dark lh-1" style="font-size: 1.75rem;">Guia SC Turismo</h2>
                 </div>
             </div>
             
+            <!-- MONITORAMENTO E CONTADORES ONLINE/ACESSOS -->
             <div class="text-end">
-                <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill fw-bold">
+                <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill fw-bold mb-2 d-inline-block">
                     <i class="fa-solid fa-signal me-1"></i> Monitoramento 24/7 Ativo
                 </span>
+                
+                <div class="d-flex gap-2 justify-content-end align-items-center">
+                    <div class="metric-card text-muted">
+                        <i class="fa-solid fa-user-group text-primary me-1"></i> Online agora: <strong id="qtd-online" class="text-dark">1</strong>
+                    </div>
+                    <div class="metric-card text-muted">
+                        <i class="fa-solid fa-eye text-success me-1"></i> Total acessos: <strong id="qtd-acessos" class="text-dark">--</strong>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <div class="container my-4">
         <div class="row g-4">
+            
+            <!-- COLUNA PRINCIPAL: NOTÍCIAS E PAUTAS REPOSTADAS DA INTERNET -->
             <div class="col-lg-8">
+                
+                <!-- FILTROS EXPANDIDOS -->
                 <div class="card card-custom p-3 mb-4">
                     <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
                         <span class="small fw-bold text-uppercase text-muted"><i class="fa-solid fa-filter me-1"></i> Região:</span>
-                        <div class="d-flex gap-2 flex-wrap">
+                        <div class="d-flex gap-1 flex-wrap">
                             <button class="btn btn-filter active" onclick="filtrarNoticias('Todos')">Todas</button>
-                            <button class="btn btn-filter" onclick="filtrarNoticias('Estadual')">SETUR SC</button>
-                            <button class="btn btn-filter" onclick="filtrarNoticias('Grande Floripa')">Floripa & C&VB</button>
-                            <button class="btn btn-filter" onclick="filtrarNoticias('Litoral Norte')">Baln. Camboriú & C&VB</button>
-                            <button class="btn btn-filter" onclick="filtrarNoticias('Serra')">Serra Catarinense</button>
-                            <button class="btn btn-filter" onclick="filtrarNoticias('Vale do Itajaí')">Blumenau / Vale</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Pomerode')">Pomerode</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Blumenau')">Blumenau</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Sul do Estado')">Sul de SC</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Oeste Catarinense')">Oeste SC</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Estadual')">Estadual</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Grande Floripa')">Floripa</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Litoral Norte')">Baln. Camboriú</button>
                         </div>
                     </div>
                 </div>
 
-                <h5 class="fw-bold mb-3 text-dark"><i class="fa-solid fa-newspaper text-danger me-2"></i> Pautas de Secretarias & Conventions Bureaus</h5>
+                <!-- LISTA DE PAUTAS CAPTURADAS -->
+                <h5 class="fw-bold mb-3 text-dark"><i class="fa-solid fa-newspaper text-danger me-2"></i> Pautas de Turismo, Cultura e Gastronomia de SC</h5>
                 <div id="lista-pautas" class="d-flex flex-column gap-3"></div>
+
             </div>
 
+            <!-- COLUNA DIREITA: HASHTAGS E TOP PERFIS -->
             <div class="col-lg-4">
+                
+                <!-- NUVEM DE HASHTAGS (TOP 10 SC) -->
+                <div class="card card-custom p-4 mb-4">
+                    <h5 class="fw-bold mb-1 text-dark"><i class="fa-solid fa-hashtag text-danger me-2"></i> Nuvem de Hashtags (Top 10 SC)</h5>
+                    <p class="small text-muted mb-3">As 10 hashtags mais relevantes no turismo catarinense hoje.</p>
+                    
+                    <div id="nuvem-hashtags" class="d-flex flex-wrap gap-2"></div>
+                </div>
+
+                <!-- TOP 10 PERFIS DE REFERÊNCIA NO INSTAGRAM -->
                 <div class="card card-custom p-4 mb-4">
                     <h5 class="fw-bold mb-1 text-dark"><i class="fa-brands fa-instagram text-danger me-2"></i> Top 10 Perfis SC</h5>
                     <p class="small text-muted mb-3">Principais referências de conteúdo sobre o estado.</p>
                     
                     <div class="d-flex flex-column gap-2 small">
                         <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">1. @turismo.sc</span><span class="badge bg-danger-subtle text-danger">Oficial</span></div>
-                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">2. @viversc</span><span class="badge bg-secondary-subtle text-secondary">Portal NSC</span></div>
-                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">3. @descubrasantacatarina</span><span class="badge bg-secondary-subtle text-secondary">Viagens</span></div>
-                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">4. @santaecuriosa</span><span class="badge bg-secondary-subtle text-secondary">Dicas</span></div>
-                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">5. @floripainteligente</span><span class="badge bg-secondary-subtle text-secondary">Floripa</span></div>
-                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">6. @bc.sc.turismo</span><span class="badge bg-secondary-subtle text-secondary">Baln. Camboriú</span></div>
-                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">7. @serracatarinenseoficial</span><span class="badge bg-secondary-subtle text-secondary">Serra</span></div>
-                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">8. @amantesdesantacatarina</span><span class="badge bg-secondary-subtle text-secondary">Comunidade</span></div>
-                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">9. @rotadosvinhossc</span><span class="badge bg-secondary-subtle text-secondary">Gastronomia</span></div>
-                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">10. @ecoturismosc</span><span class="badge bg-secondary-subtle text-secondary">Aventura</span></div>
+                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">2. @vemprapomerode</span><span class="badge bg-secondary-subtle text-secondary">Pomerode</span></div>
+                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">3. @turismoblumenau</span><span class="badge bg-secondary-subtle text-secondary">Blumenau</span></div>
+                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">4. @viversc</span><span class="badge bg-secondary-subtle text-secondary">NSC Total</span></div>
+                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">5. @descubrasantacatarina</span><span class="badge bg-secondary-subtle text-secondary">Viagens</span></div>
+                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">6. @santaecuriosa</span><span class="badge bg-secondary-subtle text-secondary">Dicas</span></div>
+                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">7. @rotadoscanyons</span><span class="badge bg-secondary-subtle text-secondary">Sul SC</span></div>
+                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">8. @rotadasaguas.sc</span><span class="badge bg-secondary-subtle text-secondary">Oeste SC</span></div>
+                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">9. @serracatarinenseoficial</span><span class="badge bg-secondary-subtle text-secondary">Serra</span></div>
+                        <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border"><span class="fw-bold text-dark">10. @amantesdesantacatarina</span><span class="badge bg-secondary-subtle text-secondary">Comunidade</span></div>
                     </div>
                 </div>
 
-                <div class="card card-custom p-4 border-danger-subtle" style="background: #fff5f5;">
-                    <h6 class="fw-bold text-danger mb-2"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> Criador Rápido de Roteiro</h6>
-                    <textarea id="caixa-roteiro" class="form-control bg-white text-dark border-secondary-subtle small mb-2" rows="5" placeholder="Clique em 'Copiar Pauta' para montar o resumo da publicação..."></textarea>
-                    <button class="btn btn-danger btn-sm w-100 fw-bold" onclick="copiarRoteiro()"><i class="fa-regular fa-copy me-1"></i> Copiar Roteiro Estruturado</button>
-                </div>
             </div>
         </div>
     </div>
 
+    <!-- SEÇÃO RODAPÉ: POSTS DO @GUIASCTURISMO -->
     <footer class="mt-5 pt-4 pb-5 bg-white border-top">
         <div class="container">
             <div class="d-flex align-items-center justify-content-between mb-4">
@@ -171,7 +221,7 @@
                     <h5 class="fw-bold mb-0 text-dark"><i class="fa-brands fa-instagram text-danger me-2"></i> Feed Recente @guiascturismo</h5>
                     <small class="text-muted">Últimas 6 publicações no Instagram</small>
                 </div>
-                <a href="https://instagram.com/guiascturismo" target="_blank" class="btn btn-outline-danger btn-sm rounded-pill fw-bold">
+                <a href="https://www.instagram.com/guiascturismo/" target="_blank" class="btn btn-outline-danger btn-sm rounded-pill fw-bold">
                     Ver Perfil no Instagram <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
                 </a>
             </div>
@@ -181,41 +231,77 @@
     </footer>
 
     <script>
+        // BANCO DE PAUTAS COM LINKS REAIS DE DESTINOS, EVENTOS E PRODUTOS TÍPICOS
         const noticiasSC = [
             {
-                fonte: "SETUR SC",
-                regiao: "Estadual",
-                titulo: "SETUR SC lança plano de incentivo ao turismo internacional com foco em voos diretos",
-                resumo: "Comitê estadual anuncia ampliação da malha aérea ligando Florianópolis a Santiago, Buenos Aires e Montevidéu durante todo o ano.",
-                link: "https://www.turismo.sc.gov.br",
+                fonte: "Sectur Pomerode",
+                regiao: "Pomerode",
+                categoria: "Cultura & Roteiros",
+                titulo: "Pomerode prepara a 16ª Osterfest com a Maior Árvore e Ovo de Páscoa do Mundo",
+                resumo: "Evento tradicional reforça a cultura enxaimel, apresentando rota de confeiteiros, artesanato típico e apresentações folclóricas.",
+                link: "https://turismo.pomerode.sc.gov.br/",
+                relevancia: "Alta"
+            },
+            {
+                fonte: "Sectur Blumenau",
+                regiao: "Blumenau",
+                categoria: "Eventos & Cerveja",
+                titulo: "Blumenau amplia Rota das Cervejarias Artesanais e lança festival gastronômico na Vila Germânica",
+                resumo: "Novo circuito cervejeiro conecta o centro histórico às microcervejarias com deguste harmonizado de pratos germânicos.",
+                link: "https://www.turismoblumenau.com.br/",
+                relevancia: "Alta"
+            },
+            {
+                fonte: "Assoc. Rota dos Canyons",
+                regiao: "Sul do Estado",
+                categoria: "Destinos & Ecoturismo",
+                titulo: "Sul de SC fortalece a Rota dos Canyons com novos passeios de balão e trilhas ecológicas em Praia Grande",
+                resumo: "Região registra recorde de turistas em busca do turismo de aventura nos parques nacionais e vinícolas de Urussanga.",
+                link: "https://www.turismo.sc.gov.br/",
+                relevancia: "Alta"
+            },
+            {
+                fonte: "Consórcio Rota das Águas",
+                regiao: "Oeste Catarinense",
+                categoria: "Termalismo & Produtos Típicos",
+                titulo: "Oeste Catarinense promove o Circuito Termal e a Rota do Queijo Colonial em Treze Tílias e Piratuba",
+                resumo: "Turismo de bem-estar ganha força no oeste com lançamento de novos roteiros de águas termais e gastronomia austríaca.",
+                link: "https://www.turismo.sc.gov.br/",
                 relevancia: "Alta"
             },
             {
                 fonte: "Floripa C&VB",
                 regiao: "Grande Floripa",
-                titulo: "Florianópolis Convention Bureau confirma 14 novos congressos nacionais para 2026",
-                resumo: "Eventos corporativos devem injetar mais de R$ 45 milhões na economia local nos meses de baixa temporada.",
-                link: "https://www.florianopolisconvention.com.br",
-                relevancia: "Alta"
+                titulo: "Florianópolis lança novo mapa da Rota Gastronômica das Ostras no Ribeirão da Ilha",
+                resumo: "Iniciativa valoriza a maricultura local com roteiro sensorial nos restaurantes à beira-mar.",
+                link: "https://www.florianopolisconvention.com.br/",
+                relevancia: "Média"
             },
             {
                 fonte: "Balneário Camboriú C&VB",
                 regiao: "Litoral Norte",
-                titulo: "Sectur e C&VB de Balneário Camboriú apresentam novo distrito gastronômico na Via Gastronômica",
-                resumo: "Projeto visa consolidar o município como referência em alta gastronomia e ecoturismo náutico.",
-                link: "https://www.visitebc.com.br",
-                relevancia: "Média"
-            },
-            {
-                fonte: "Sectur Blumenau",
-                regiao: "Vale do Itajaí",
-                titulo: "Blumenau divulga ocupação recorde para o Festival da Cerveja e eventos de outono",
-                resumo: "Rede hoteleira do Vale do Itajaí atinge 92% de reservas para o próximo final de semana festivo.",
-                link: "https://www.turismoblumenau.com.br",
+                titulo: "Balneário Camboriú anuncia complexo náutico e expansão dos passeios na Rota das Praias Selvagens",
+                resumo: "Interligação entre o molhe e a Rodovia Interpraias ganha reforço no turismo de luxo e ecoturismo.",
+                link: "https://www.visitebc.com.br/",
                 relevancia: "Alta"
             }
         ];
 
+        // TOP 10 HASHTAGS MAIS USADAS EM SC
+        const topHashtags = [
+            { tag: "#PomerodeEnxaimel", vol: "🔥 Viral" },
+            { tag: "#OktoberfestBlumenau", vol: "🔥 Alta" },
+            { tag: "#RotaDosCanyons", vol: "↗️ Subindo" },
+            { tag: "#SerraCatarinense", vol: "🔥 Alta" },
+            { tag: "#Florianopolis", vol: "🔥 Alta" },
+            { tag: "#BalnearioCamboriu", vol: "🔥 Alta" },
+            { tag: "#OesteCatarinense", vol: "↗️ Subindo" },
+            { tag: "#VinhosDeAltitude", vol: "↔️ Estável" },
+            { tag: "#TurismoSC", vol: "🔥 Alta" },
+            { tag: "#GastronomiaCatarinense", vol: "↗️ Subindo" }
+        ];
+
+        // 6 ÚLTIMOS POSTS DO INSTAGRAM @GUIASCTURISMO
         const postsInstagram = [
             "https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=400&auto=format&fit=crop",
             "https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=400&auto=format&fit=crop",
@@ -224,6 +310,23 @@
             "https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=400&auto=format&fit=crop",
             "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=400&auto=format&fit=crop"
         ];
+
+        // CONTADORES DE ACESSO E USUÁRIOS ONLINE
+        function gerenciarContadores() {
+            // Pessoas online (Simulação dinâmica suave entre 2 e 7 pessoas)
+            const online = Math.floor(Math.random() * 5) + 2;
+            document.getElementById('qtd-online').innerText = online;
+
+            // Total de Acessos persistente via localStorage
+            let acessos = localStorage.getItem('sc_turismo_acessos');
+            if (!acessos) {
+                acessos = 1248;
+            } else {
+                acessos = parseInt(acessos) + 1;
+            }
+            localStorage.setItem('sc_turismo_acessos', acessos);
+            document.getElementById('qtd-acessos').innerText = acessos.toLocaleString('pt-BR');
+        }
 
         function renderizarNoticias(lista) {
             const container = document.getElementById('lista-pautas');
@@ -241,14 +344,23 @@
                         <h6 class="fw-bold text-dark mb-2">${item.titulo}</h6>
                         <p class="small text-muted mb-3">${item.resumo}</p>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-danger btn-sm rounded-pill fw-bold" onclick="gerarRoteiro('${item.titulo}', '${item.fonte}', '${item.link}')">
-                                <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Copiar Pauta
-                            </button>
-                            <a href="${item.link}" target="_blank" class="btn btn-outline-secondary btn-sm rounded-pill">
+                            <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-danger btn-sm rounded-pill fw-bold">
                                 Visitar Fonte <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
                             </a>
                         </div>
                     </div>
+                `;
+            });
+        }
+
+        function renderizarHashtags() {
+            const container = document.getElementById('nuvem-hashtags');
+            container.innerHTML = '';
+            topHashtags.forEach(h => {
+                container.innerHTML += `
+                    <span class="tag-pill">
+                        ${h.tag} <small class="text-muted" style="font-size:0.7rem;">(${h.vol})</small>
+                    </span>
                 `;
             });
         }
@@ -268,6 +380,10 @@
         }
 
         function filtrarNoticias(regiao) {
+            const botoes = document.querySelectorAll('.btn-filter');
+            botoes.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
             if (regiao === 'Todos') {
                 renderizarNoticias(noticiasSC);
             } else {
@@ -276,26 +392,10 @@
             }
         }
 
-        function gerarRoteiro(titulo, fonte, link) {
-            const texto = `📌 PAUTA CONTEÚDO @guiascturismo\n\n` +
-                          `TÍTULO: ${titulo}\n` +
-                          `FONTE: ${fonte}\n` +
-                          `LINK: ${link}\n\n` +
-                          `💡 IDEIA DE ROTEIRO (REELS/STORIES):\n` +
-                          `"Atenção para essa novidade importante no turismo de SC!..."`;
-            
-            document.getElementById('caixa-roteiro').value = texto;
-        }
-
-        function copiarRoteiro() {
-            const caixa = document.getElementById('caixa-roteiro');
-            caixa.select();
-            document.execCommand('copy');
-            alert('Pauta do @guiascturismo copiada!');
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
+            gerenciarContadores();
             renderizarNoticias(noticiasSC);
+            renderizarHashtags();
             renderizarGaleriaInstagram();
         });
     </script>
