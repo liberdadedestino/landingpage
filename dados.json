@@ -1,0 +1,28 @@
+{
+    "atualizado_em": "Aguardando primeira execução na nuvem...",
+    "top_tags": [
+        {"tag": "#Florianopolis", "volume": "Alto", "tendencia": "🔥 Alta"},
+        {"tag": "#BalnearioCamboriu", "volume": "Alto", "tendencia": "🔥 Alta"},
+        {"tag": "#SerraCatarinense", "volume": "Médio", "tendencia": "↗️ Subindo"},
+        {"tag": "#VindimaSC", "volume": "Médio", "tendencia": "🔥 Alta"},
+        {"tag": "#GastronomiaCatarinense", "volume": "Médio", "tendencia": "↔️ Estável"},
+        {"tag": "#RotaDosPardais", "volume": "Alto", "tendencia": "🔥 Viral"},
+        {"tag": "#PraiaDoRosa", "volume": "Médio", "tendencia": "↔️ Estável"},
+        {"tag": "#BetoCarrero", "volume": "Alto", "tendencia": "↔️ Estável"},
+        {"tag": "#OktoberfestBlumenau", "volume": "Baixo", "tendencia": "↗️ Preparação"},
+        {"tag": "#EcoturismoSC", "volume": "Médio", "tendencia": "↗️ Subindo"}
+    ],
+    "noticias": [
+        {
+            "id": 1,
+            "fonte": "SETUR SC",
+            "regiao": "Estadual",
+            "categoria": "Economia / Setor",
+            "titulo": "Pesquisa aponta aumento de 18% no gasto médio do turista estrangeiro em SC",
+            "resumo": "Dados da Fecomércio e SETUR mostram que argentinos e uruguaios lideram o consumo no setor gastronômico e hoteleiro.",
+            "link": "https://www.turismo.sc.gov.br",
+            "data": "Hoje",
+            "relevancia": "Alta"
+        }
+    ]
+}
