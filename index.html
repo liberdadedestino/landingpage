@@ -1,25 +1,242 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Harbs.Lab — Start Kit Ouro</title>
-  <meta name="description" content="Presença digital premium em 48h. Bio otimizada, 9 peças para Instagram, legendas e análise estratégica por R$ 99." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Inteligência | Guia SC Turismo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --card-dark: #151c2c;
+            --accent: #10b981;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: #f1f5f9;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .header-panel {
+            background-color: var(--card-dark);
+            border-bottom: 1px solid #1e293b;
+            padding: 20px 0;
+        }
+        .card-custom {
+            background-color: var(--card-dark);
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+        }
+        .btn-filter {
+            background: #1e293b;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            font-size: 0.85rem;
+        }
+        .btn-filter.active, .btn-filter:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+    </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Pular para o conteúdo</a>
 
-  <div class="site-shell">
-    <header class="topbar">
-      <a class="brand" href="#hero" aria-label="Harbs.lab início">
-        <svg viewBox="0 0 120 28" aria-hidden="true" class="brand-mark">
-          <path d="M8 22V6h4v6h8V6h4v16h-4v-6h-8v6H8Z" fill="currentColor"/>
-          <path d="M34 22V6h9.2c4.5 0 7.2 2.3 7.2 6 0 2.2-1.1 4-3.1 4.8L51 22h-4.7l-3.1-4.4H38V22h-4Zm4-7.8h4.7c2.2 0 3.4-.9 3.4-2.5s-1.2-2.4-3.4-2.4H38v4.9Z" fill="currentColor"/>
-          <path d="M58.5 22c-4.3 0-7.1-2.3-7.1-5.7 0-3.5 2.8-5.8 7.2-5.8h4.4v-1c0-1.2-.9-1.9-2.6-1.9-1.5 0-2.5.5-2.8 1.5h-4c.4-3.2 3.1-5 7-5 4.4 0 6.6 1.9 6.6 5.7V22h-3.7l-.3-1.9c-1.1 1.4-2.7 2.1-4.7 2.1Zm1-3c2 0 3.5-1 3.5-2.8v-.6h-3.6c-2.3 0-3.4.5-3.4 1.7 0 1 .9 1.7 3.5 1.7Z" fill="currentColor"/>
-          <path d="M72 22V6h4v12.5h7.6V22H72Z" fill="currentColor"/>
-          <circle cx="95" cy="14" r="8" stroke="currentColor" stroke-width="4" fill="none"/>
-          <path d="M108 22V6h4v5.5c1-1.4 2.7-2.1 4.8-2.1 3.8 0 6.2 2.5
+    <!-- CABEÇALHO DO DASHBOARD INTERNO -->
+    <header class="header-panel mb-4">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <span class="badge bg-success mb-1">USO PRIVADO - CENTRAL DE CONTEÚDO</span>
+                <h3 class="fw-bold mb-0 text-white"><i class="fa-solid fa-compass text-success me-2"></i> Guia SC Turismo - Intelligence Hub</h3>
+            </div>
+            <div class="text-end">
+                <small class="text-muted d-block">Status do Painel:</small>
+                <span id="data-atualizacao" class="fw-bold text-success"><i class="fa-solid fa-circle-check me-1"></i> Ativo 24/7 na Nuvem</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row g-4">
+            
+            <!-- COLUNA ESQUERDA: ALIMENTAÇÃO DE PAUTAS E FILTROS -->
+            <div class="col-lg-8">
+                
+                <!-- FILTROS DE REGIONALIZAÇÃO -->
+                <div class="card card-custom p-3 mb-4">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <span class="small fw-bold text-uppercase text-muted"><i class="fa-solid fa-filter me-1"></i> Filtrar Região:</span>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button class="btn btn-filter active" onclick="filtrarNoticias('Todos')">Todas</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Estadual')">Estadual</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Grande Floripa')">Floripa</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Litoral Norte')">Litoral Norte (BC/Itajaí)</button>
+                            <button class="btn btn-filter" onclick="filtrarNoticias('Serra')">Serra Catarinense</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FEED DE NOTÍCIAS PARA CRIAÇÃO DE PAUTAS -->
+                <h5 class="fw-bold mb-3 text-white"><i class="fa-solid fa-newspaper text-success me-2"></i> Notícias e Pautas Destaques de Santa Catarina</h5>
+                <div id="lista-pautas" class="d-flex flex-column gap-3">
+                    <!-- Injetado dinamicamente -->
+                </div>
+
+            </div>
+
+            <!-- COLUNA DIREITA: RADAR DE TENDÊNCIAS E REELS -->
+            <div class="col-lg-4">
+                
+                <!-- NUVEM DE TAGS E ASSUNTOS VIRAS -->
+                <div class="card card-custom p-4 mb-4">
+                    <h5 class="fw-bold mb-3 text-white"><i class="fa-solid fa-fire text-danger me-2"></i> Top 10 Termos em Alta (SC)</h5>
+                    <p class="small text-muted mb-3">Assuntos com maior volume de buscas e postagens nas últimas 24 horas no estado.</p>
+                    <div id="container-tags" class="d-flex flex-column gap-2">
+                        <!-- Injetado dinamicamente -->
+                    </div>
+                </div>
+
+                <!-- CAIXA DE ROTEIRIZAÇÃO RÁPIDA -->
+                <div class="card card-custom p-4 border-success">
+                    <h6 class="fw-bold text-success mb-2"><i class="fa-solid fa-lightbulb me-2"></i> Criador Rápido de Roteiro</h6>
+                    <p class="small text-muted mb-3">Clique em <b>"Copiar Pauta"</b> em qualquer notícia para gerar o gancho abaixo:</p>
+                    <textarea id="caixa-roteiro" class="form-control bg-dark text-light border-secondary small" rows="6" placeholder="Sua pauta selecionada aparecerá aqui para você colar na sua IA ou bloco de notas..."></textarea>
+                    <button class="btn btn-success btn-sm mt-2 w-100" onclick="copiarRoteiro()"><i class="fa-regular fa-copy me-1"></i> Copiar Roteiro</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dadosPadrao = {
+            "top_tags": [
+                {"tag": "#Florianopolis", "tendencia": "🔥 Alta"},
+                {"tag": "#BalnearioCamboriu", "tendencia": "🔥 Alta"},
+                {"tag": "#SerraCatarinense", "tendencia": "↗️ Subindo"},
+                {"tag": "#VindimaSC", "tendencia": "🔥 Alta"},
+                {"tag": "#GastronomiaCatarinense", "tendencia": "↔️ Estável"},
+                {"tag": "#RotaDosPardais", "tendencia": "🔥 Viral"},
+                {"tag": "#PraiaDoRosa", "tendencia": "↔️ Estável"},
+                {"tag": "#BetoCarrero", "tendencia": "↔️ Estável"},
+                {"tag": "#OktoberfestBlumenau", "tendencia": "↗️ Preparação"},
+                {"tag": "#EcoturismoSC", "tendencia": "↗️ Subindo"}
+            ],
+            "noticias": [
+                {
+                    "fonte": "SETUR SC",
+                    "regiao": "Estadual",
+                    "titulo": "Pesquisa aponta aumento de 18% no gasto médio do turista estrangeiro em SC",
+                    "resumo": "Dados da Fecomércio e SETUR mostram que argentinos e uruguaios lideram o consumo no setor gastronômico e hoteleiro.",
+                    "link": "https://www.turismo.sc.gov.br",
+                    "relevancia": "Alta"
+                },
+                {
+                    "fonte": "PMF / Turismo",
+                    "regiao": "Grande Floripa",
+                    "titulo": "Florianópolis lança novo sistema de sinalização turística com QR Code na Rota das Rendeiras",
+                    "resumo": "Iniciativa visa conectar turistas à história do artesanato local na Lagoa da Conceição.",
+                    "link": "https://www.pmf.sc.gov.br",
+                    "relevancia": "Média"
+                },
+                {
+                    "fonte": "Sectur BC",
+                    "regiao": "Litoral Norte",
+                    "titulo": "Balneário Camboriú confirma calendário de shows e feiras gastronômicas no Molhe do Pontal Norte",
+                    "resumo": "Programação se estenderá até o fim da temporada para manter a ocupação hoteleira aquecida.",
+                    "link": "https://www.bc.sc.gov.br",
+                    "relevancia": "Alta"
+                },
+                {
+                    "fonte": "Serra Catarinense",
+                    "regiao": "Serra",
+                    "titulo": "Novas pousadas de charme na Rota dos Vinhos de Altitude batem 90% de reservas antecipadas",
+                    "resumo": "Turismo de experiência atrai visitantes de SP, PR e RS para Urubici e São Joaquim.",
+                    "link": "https://www.turismo.sc.gov.br",
+                    "relevancia": "Alta"
+                }
+            ]
+        };
+
+        let todasNoticias = dadosPadrao.noticias;
+
+        function carregarDados() {
+            renderizarNoticias(todasNoticias);
+            renderizarTags(dadosPadrao.top_tags);
+        }
+
+        function renderizarNoticias(lista) {
+            const container = document.getElementById('lista-pautas');
+            container.innerHTML = '';
+
+            lista.forEach(item => {
+                const badgeColor = item.relevancia === 'Alta' ? 'bg-danger' : 'bg-warning text-dark';
+                container.innerHTML += `
+                    <div class="card card-custom p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="badge ${badgeColor} me-2">${item.relevancia} Relevância</span>
+                                <span class="badge bg-secondary">${item.regiao}</span>
+                            </div>
+                            <small class="text-muted"><i class="fa-solid fa-building me-1"></i>${item.fonte}</small>
+                        </div>
+                        <h6 class="fw-bold text-white mb-2">${item.titulo}</h6>
+                        <p class="small text-secondary mb-3">${item.resumo}</p>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-success btn-sm" onclick="gerarRoteiro('${item.titulo}', '${item.fonte}', '${item.link}')">
+                                <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Copiar Pauta
+                            </button>
+                            <a href="${item.link}" target="_blank" class="btn btn-outline-secondary btn-sm">
+                                Visitar Fonte <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderizarTags(tags) {
+            const container = document.getElementById('container-tags');
+            container.innerHTML = '';
+
+            tags.forEach((t, i) => {
+                container.innerHTML += `
+                    <div class="d-flex justify-content-between align-items-center p-2 rounded bg-dark border border-secondary">
+                        <span class="small fw-bold text-light">${i+1}. ${t.tag}</span>
+                        <span class="small badge bg-outline-light text-muted">${t.tendencia}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function filtrarNoticias(regiao) {
+            if (regiao === 'Todos') {
+                renderizarNoticias(todasNoticias);
+            } else {
+                const filtradas = todasNoticias.filter(n => n.regiao === regiao);
+                renderizarNoticias(filtradas);
+            }
+        }
+
+        function gerarRoteiro(titulo, fonte, link) {
+            const texto = `📌 PAUTA DE CONTEÚDO (GUIA SC TURISMO)\n\n` +
+                          `TÍTULO/NOTÍCIA: ${titulo}\n` +
+                          `FONTE REGISTRADA: ${fonte}\n` +
+                          `LINK DA FONTE: ${link}\n\n` +
+                          `💡 IDEIA DE HOOK PARA REEL/CARROSSEL:\n` +
+                          `"Você sabia que isso está acontecendo em Santa Catarina agora?..."`;
+            
+            document.getElementById('caixa-roteiro').value = texto;
+        }
+
+        function copiarRoteiro() {
+            const caixa = document.getElementById('caixa-roteiro');
+            caixa.select();
+            document.execCommand('copy');
+            alert('Pauta copiada para a área de transferência!');
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarDados);
+    </script>
+</body>
+</html>
